@@ -20,18 +20,18 @@
 # Usage:
 #
 # docker build -t crops/chameleonsocks -f Dockerfile .
+# Original maintainer: Todor Minchev <todor.minchev@linux.intel.com>
 
-FROM debian:wheezy
-MAINTAINER Todor Minchev <todor.minchev@linux.intel.com>
+FROM debian:bookworm
 ENV CHAMELEONSOCKS_VERSION 1.2
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
 	redsocks \
 	curl \
-	python \
-	python-pip \
-	iptables && pip install iptools
+	python3 \
+	python3-pip \
+	iptables && pip install --break-system-packages iptools
 
 RUN mkdir -p /tmp/chameleonsocks/confs/
 COPY confs /tmp/chameleonsocks/confs/
